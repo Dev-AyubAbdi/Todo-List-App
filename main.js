@@ -1,6 +1,6 @@
 const TodoForm = document.querySelector('#todo-Form');
 const TodoInput = document.querySelector('#Todo-Input');
-const todoList = document.querySelector('#Todo-Lists');
+const todoList = document.querySelector('.Todo-Lists');
 
 TodoForm.addEventListener('submit', addTaks)
 
@@ -11,7 +11,7 @@ function addTaks(event) {
 
     if(tasks !== " ") {
         const task = {
-            Id: date.now(),
+            Id: Date.now(),
             text: tasks,
             completed: false
 
@@ -21,4 +21,17 @@ function addTaks(event) {
     }
 }
 
-function addToDom(task)
+function addToDom(task) {
+    const li = document.createElement('li')
+    li.className = "todo-Items"
+    li.dataset.id = task.id
+
+    li.innerHTML = 
+         `   <input type="checkbox" class="checkbox>
+                <span class"task">${task.text}</span>
+                <button class"Edite-Btn">Edite</button>
+                <button class="Delete-Btn">Delete</button>
+            `
+
+      todoList.appendChild(li)
+}
