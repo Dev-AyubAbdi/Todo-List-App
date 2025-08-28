@@ -2,4 +2,56 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.container {
+    background-color: #fff;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.container h2 {
+    text-align: center;
+    font-size: 2rem;
+}
+
+#todo-Form {
+    display: flex;
+}
+
+#todo-Form input {
+    flex: 1;
+    padding: 15px;
+    margin-right: 4px;
+    font-size: 16px;
+}
+#todo-Form button {
+    font-size: 16px;
+}
+
+.Todo-Lists {
+    list-style: none;
+    padding: 0;
+}
+.todo-Items 
+{
+    display: flex;
+    align-content: center;
+    background-color: #eee;
+    padding: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.todo-Items .task {
+    flex: 1;
+}
+
+.todo-Items button {
+    margin-right: 5px;
+}
+
+
