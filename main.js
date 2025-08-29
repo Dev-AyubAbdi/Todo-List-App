@@ -4,16 +4,16 @@ const todoList = document.querySelector(".Todo-Lists");
 
 TodoForm.addEventListener("submit", addTaks);
 
-document.addEventListener('DOMContentLoaded', loadTask);
+document.addEventListener("DOMContentLoaded", loadTask);
 
 function loadTask() {
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-    tasks.forEach(task => {
-        addToDom(task)
-    })
+  tasks.forEach((task) => {
+    addToDom(task);
+  });
 }
- 
+
 function addTaks(event) {
   event.preventDefault();
 
@@ -28,7 +28,7 @@ function addTaks(event) {
 
     addToDom(task);
     TodoInput.value = "";
-    addTolocalStorage(task);
+    addLocalStorage(task);
   }
 }
 
@@ -44,15 +44,61 @@ function addToDom(task) {
             `;
 
   todoList.appendChild(li);
+
+  attachEventLisentener(li, task);
 }
 
-function addTolocalStorage(task) {
+function attachEventLisentener(li, task) {
+  const DeleteBtn = li.querySelector(".Delete-Btn");
+  const EditeBtn = li.querySelector(".Edite-Btn")
 
-    const tasks = JSON.parse(localStorage.getItem('tasks')) || []
+  DeleteBtn.addEventListener("click", function () {
+    handleDelete(task.id, li);
+  });
 
-    tasks.push(task);
-    
-    localStorage.setItem('tasks', JSON.stringify(tasks))
+  EditeBtn.addEventListener('click', function() {
+    handleEdite(task, li)
+  })
 }
 
+function handleDelete(id, li) {
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
+  tasks = tasks.filter((task) => task.id != id);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+
+  li.remove();
+}
+
+function handleEdite(task, li) {
+    const textTask = li.querySelector('.task')
+    const NewTaskText = prompt(`Edite You're Task`, textTask.textContent)
+
+    if(NewTaskText !== null && NewTaskText.trim() !== " ")  {
+        task.text;
+            textTask.textContent = NewTaskText
+    }
+
+    updateLocalStorage(task.id, NewTaskText)
+}
+
+function updateLocalStorage(id, NewTaskText) {
+    const  tasks = JSON.parse(localStorage.getItem("tasks")) || []
+
+    const task = tasks.find((task) => task.id == id) 
+
+    if(task) {
+        tasks.text = NewTaskText
+
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+    }
+}
+
+function addLocalStorage(task) {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+  tasks.push(task);
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
